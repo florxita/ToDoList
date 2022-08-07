@@ -1,52 +1,62 @@
 import { Item, Check } from "./styles/List.styled";
-import { BiDotsHorizontalRounded, BiPencil } from "react-icons/bi";
+import { BiPencil } from "react-icons/bi";
 import ToDoListContext from "./context/ToDoListContext";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import { CloseX } from "./styles/MenuTooltip.styled";
 
-const List = ({ todo }) => {
-  const ref = useRef();
+const List = ({ item }) => {
   const {
-    handleDelete,
-    handleUpdate,
+    deleteTask,
+    setTask,
     check,
     setCheck,
-    sub,
-    setSub,
-    toggleSubmit,
-    setToggleSubmit,
+    setEditMode,
+    editMode,
+    dispatch,
+    UPDATE,
+    task,
+    handleFocus,
   } = useContext(ToDoListContext);
 
-  const { id, task, completed } = todo;
-
   const handleCheck = () => {
-    todo.completed = !completed;
     setCheck(!check);
-    sub == "taskCompleted" ? setSub("") : setSub("taskCompleted");
+    handleFocus();
   };
-  const editTask = () => {
-    setToggleSubmit(true);
-    handleUpdate(todo);
+
+  const edit = (item) => {
+    setEditMode(true);
+    setTask(item.task);
+    handleFocus();
+  };
+
+  const editTask = (item) => {
+    dispatch({
+      type: UPDATE,
+      payload: { ...item, task: task },
+    });
+    setEditMode(false);
+    setTask("");
   };
 
   return (
-    <>
-      <Item>
-        <Check>
-          <input
-            id={id}
-            type="checkbox"
-            checked={completed}
-            onChange={handleCheck}
-          />
-          <label htmlFor={id}></label>
-        </Check>
-        <p className={sub}>{task}</p>
-        {/* <BiPencil onClick={() => editTask()} /> */}
+    <Item>
+      <Check>
+        <input type="checkbox" id={item.id} onChange={handleCheck} />
+        <label htmlFor={item.id}></label>
+      </Check>
+      <p className={check ? "taskCompleted" : null}>{item.task}</p>
 
-        <CloseX onClick={() => handleDelete(todo.id)} />
-      </Item>
-    </>
+      <div className="container">
+        {editMode ? (
+          <span id={item.id} onClick={() => editTask(item)}>
+            guardar cambios
+          </span>
+        ) : (
+          <BiPencil onClick={() => edit(item)} />
+        )}
+        <CloseX onClick={() => deleteTask(item.id)} />
+      </div>
+    </Item>
   );
 };
 export default List;

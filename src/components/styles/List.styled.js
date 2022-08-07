@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { TooltipWrapper } from "./MenuTooltip.styled";
 
 export const Item = styled.li`
   border: 0.14rem solid ${({ theme }) => theme.colors.secondary};
@@ -25,11 +24,17 @@ export const Item = styled.li`
     flex-grow: 2;
     padding: 0 0.9rem;
     text-align: left;
-    text-decoration: "dashed";
   }
   .taskCompleted {
     text-decoration: line-through;
     opacity: 70%;
+  }
+  .container {
+    display: flex;
+    gap: 0.5rem;
+  }
+  span {
+    color: ${({ theme }) => theme.colors.feature};
   }
 `;
 
@@ -49,7 +54,6 @@ export const Check = styled.div`
       position: absolute;
       width: 0.7rem;
       height: 0.7rem;
-
       border: 1px solid ${({ theme }) => theme.colors.light};
       background: none;
     }

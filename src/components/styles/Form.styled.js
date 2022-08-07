@@ -9,7 +9,7 @@ export const FormContainer = styled.div`
   height: 40rem;
   max-height: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-direction: column;
   align-items: center;
   z-index: 100;
@@ -21,8 +21,7 @@ export const FormContainer = styled.div`
   & figure {
     padding-bottom: 1rem;
     position: relative;
-    width: 101%;
-    height: auto;
+    width: 102%;
 
     & img {
       aspect-ratio: 4/0;
@@ -52,5 +51,11 @@ export const FormContainer = styled.div`
   ${AddForm} svg {
     font-size: 22px;
     stroke-width: 1px;
+  }
+  .noTaskMessaje {
+    padding: 5rem 0;
+    font-size: 18px;
+    font-weight: 300;
+    flex-grow: 2;
   }
 `;

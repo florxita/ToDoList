@@ -1,7 +1,5 @@
 import { createContext } from "react";
 
-const ToDoListContext = createContext({
-  tasks: [],
-});
+const ToDoListContext = createContext();
 
 export default ToDoListContext;

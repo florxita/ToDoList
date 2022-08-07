@@ -1,57 +1,41 @@
-import { FormContainer } from "./styles/Form.styled";
-import List from "./List";
+import { useContext } from "react";
 import { AddForm } from "./styles/Input.styled";
-import { BiPlus } from "react-icons/bi";
-import { useState, useContext } from "react";
-import { v4 as uuiv4 } from "uuid";
-import { ErrorBg, Messaje } from "./styles/Messaje.styled.js";
+import { BiPencil, BiPlus } from "react-icons/bi";
+import { FormContainer } from "./styles/Form.styled";
 import ToDoListContext from "./context/ToDoListContext";
+import List from "./List";
+import { ErrorBg, Messaje } from "./styles/Messaje.styled";
 
-const KEY = "todokey";
 const Form = () => {
   const {
-    data,
-    handleAdd,
     task,
     setTask,
+    data,
+    editMode,
+    addTask,
+    handleFocus,
+    inputRef,
     error,
-    state,
     setError,
-    toggleSubmit,
-    setToggleSubmit,
+    mensaje,
+    setMensaje,
   } = useContext(ToDoListContext);
-
-  const [mensaje, setMensaje] = useState(" ");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (task.trim() === "") {
-      setError(true);
-      setMensaje("El campo no puede estar vacio.");
-      return;
+    if (task.length === 0) {
+      // setError(true);
+    } else {
+      //   // setError(false)
+      data.length < 9
+        ? (setError(false), addTask())
+        : (setError(true),
+          setMensaje(
+            "Debes terminar algunas de tus tareas para poder agregar nuevas."
+          ),
+          setTask(""));
     }
-    setError(false);
-
-    const newTask = { id: uuiv4(), task, completed: false };
-    state.length <= 10 ? handleAdd(newTask) : setError(true);
-    setMensaje(
-      "Debes terminar algunas de tus tareas para poder agregar nuevas."
-    );
-    setTask(" ");
   };
-
-  // const inputElement = useRef(null);
-  // useEffect(() => {
-  //   if (inputElement.current) {
-  //     inputElement.current.focus();
-  //   }
-  //   if (task.trim() === " ") {
-  //     inputElement.current.focus();
-  //   }
-  // });
-
-  const handleChange = (e) => setTask(e.target.value);
 
   return (
     <>
@@ -59,37 +43,47 @@ const Form = () => {
         <ErrorBg>
           <Messaje>
             <p>{mensaje}</p>
-            {state.length > 10 && <span>* Limite de Tareas 10 *</span>}
+            <span>*Limite de tareas 10*</span>
             <button onClick={() => setError(false)}>Entiendo</button>
           </Messaje>
         </ErrorBg>
       )}
       <FormContainer>
         <figure>
-          <img src="src/img/form-img.svg" alt="" />
+          <img src="src/img/form-img.svg" alt="borde espiralado nota" />
         </figure>
-        <h1>ToDoList</h1>
-        <ul>
-          {data.map((todo, i) => (
-            <List key={todo.id} todo={todo} i={i}></List>
-          ))}
-        </ul>
+        <h1>ToDo List 5</h1>
 
-        <AddForm onSubmit={handleSubmit}>
-          <button>{toggleSubmit === false ? <BiPlus /> : "editar"}</button>
+        {data.length === 0 ? (
+          <span className="noTaskMessaje">No existen tareas pendientes</span>
+        ) : (
+          <ul>
+            {data.map((item) => (
+              <List key={item.id} item={item}></List>
+            ))}
+          </ul>
+        )}
+        <AddForm onSubmit={editMode ? console.log("edit mode") : handleSubmit}>
           <input
-            autoFocus
             type="text"
-            name="task"
-            // ref={inputElement}
             value={task}
-            onChange={handleChange}
-            placeholder="Agregar Item"
+            onChange={(e) => setTask(e.target.value)}
+            placeholder="Ingresa una tarea"
+            ref={inputRef}
           />
+          {editMode ? (
+            <button disabled>
+              {" "}
+              <BiPencil />
+            </button>
+          ) : (
+            <button onClick={handleFocus}>
+              <BiPlus />
+            </button>
+          )}
         </AddForm>
       </FormContainer>
     </>
   );
 };
-
 export default Form;
