@@ -24,14 +24,15 @@ export const AddForm = styled.form`
       max-width: 80vw;
       transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
     }
-    :disabled {
-      background: ${({ theme }) => theme.colors.light};
-
-      &:first-child {
-        color: #000;
-      }
+    svg {
+      /* font-size: 35px; */
+      width: 3rem;
+      height: 3rem;
+      padding: 0.5rem;
+      border-radius: 50%;
     }
   }
+
   input {
     color: ${({ theme }) => theme.colors.main};
     border: solid 0.05rem ${({ theme }) => theme.colors.secondary};

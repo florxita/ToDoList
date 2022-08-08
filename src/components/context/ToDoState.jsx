@@ -15,6 +15,7 @@ const ToDoState = ({ children }) => {
   const [mensaje, setMensaje] = useState(" ");
 
   const inputRef = useRef(null);
+  const [taskEdited, setTaskEdited] = useState("");
 
   const { DELETE, UPDATE, ADD } = TYPES;
 
@@ -67,6 +68,9 @@ const ToDoState = ({ children }) => {
 
     handleFocus,
     inputRef,
+
+    setTaskEdited,
+    taskEdited,
   };
 
   return (

@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AddForm } from "./styles/Input.styled";
-import { BiPencil, BiPlus } from "react-icons/bi";
+import { BiPlus } from "react-icons/bi";
 import { FormContainer } from "./styles/Form.styled";
 import ToDoListContext from "./context/ToDoListContext";
 import List from "./List";
@@ -19,6 +19,11 @@ const Form = () => {
     setError,
     mensaje,
     setMensaje,
+    setEditMode,
+    dispatch,
+    UPDATE,
+    taskEdited,
+    setTaskEdited,
   } = useContext(ToDoListContext);
 
   const handleSubmit = (e) => {
@@ -37,6 +42,15 @@ const Form = () => {
     }
   };
 
+  const editTask = (item) => {
+    dispatch({
+      type: UPDATE,
+      payload: { ...item, task: task },
+    });
+    setEditMode(false);
+    setTask("");
+  };
+
   return (
     <>
       {error === true && (
@@ -52,18 +66,22 @@ const Form = () => {
         <figure>
           <img src="src/img/form-img.svg" alt="borde espiralado nota" />
         </figure>
-        <h1>ToDo List 5</h1>
+        <h1>ToDo List</h1>
 
         {data.length === 0 ? (
           <span className="noTaskMessaje">No existen tareas pendientes</span>
         ) : (
           <ul>
             {data.map((item) => (
-              <List key={item.id} item={item}></List>
+              <List
+                setTaskEdited={setTaskEdited}
+                key={item.id}
+                item={item}
+              ></List>
             ))}
           </ul>
         )}
-        <AddForm onSubmit={editMode ? console.log("edit mode") : handleSubmit}>
+        <AddForm onSubmit={handleSubmit}>
           <input
             type="text"
             value={task}
@@ -72,13 +90,17 @@ const Form = () => {
             ref={inputRef}
           />
           {editMode ? (
-            <button disabled>
-              {" "}
-              <BiPencil />
+            <button>
+              <BiPlus
+                onClick={(e) => {
+                  e.preventDefault();
+                  editTask(taskEdited);
+                }}
+              />
             </button>
           ) : (
-            <button onClick={handleFocus}>
-              <BiPlus />
+            <button>
+              <BiPlus onClick={handleFocus} />
             </button>
           )}
         </AddForm>

@@ -11,11 +11,8 @@ const List = ({ item }) => {
     check,
     setCheck,
     setEditMode,
-    editMode,
-    dispatch,
-    UPDATE,
-    task,
     handleFocus,
+    setTaskEdited,
   } = useContext(ToDoListContext);
 
   const handleCheck = () => {
@@ -26,16 +23,8 @@ const List = ({ item }) => {
   const edit = (item) => {
     setEditMode(true);
     setTask(item.task);
+    setTaskEdited(item);
     handleFocus();
-  };
-
-  const editTask = (item) => {
-    dispatch({
-      type: UPDATE,
-      payload: { ...item, task: task },
-    });
-    setEditMode(false);
-    setTask("");
   };
 
   return (
@@ -47,13 +36,8 @@ const List = ({ item }) => {
       <p className={check ? "taskCompleted" : null}>{item.task}</p>
 
       <div className="container">
-        {editMode ? (
-          <span id={item.id} onClick={() => editTask(item)}>
-            guardar cambios
-          </span>
-        ) : (
-          <BiPencil onClick={() => edit(item)} />
-        )}
+        <BiPencil onClick={() => edit(item)} />
+
         <CloseX onClick={() => deleteTask(item.id)} />
       </div>
     </Item>
