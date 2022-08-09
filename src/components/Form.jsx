@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AddForm } from "./styles/Input.styled";
 import { BiPlus } from "react-icons/bi";
 import { FormContainer } from "./styles/Form.styled";
@@ -26,29 +26,42 @@ const Form = () => {
     setTaskEdited,
   } = useContext(ToDoListContext);
 
+  useEffect(() => {
+    localStorage.setItem("tareas", JSON.stringify(data));
+  }, [data]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (task.length === 0) {
-      // setError(true);
+      handleFocus();
     } else {
-      //   // setError(false)
       data.length < 9
         ? (setError(false), addTask())
         : (setError(true),
           setMensaje(
-            "Debes terminar algunas de tus tareas para poder agregar nuevas."
+            "Debes terminar algunas de tus tareas para poder agregar nuevas.*Limite de tareas 10*"
           ),
           setTask(""));
     }
   };
 
   const editTask = (item) => {
-    dispatch({
-      type: UPDATE,
-      payload: { ...item, task: task },
-    });
-    setEditMode(false);
-    setTask("");
+    if (task.length === 0) {
+      setError(true);
+      setMensaje("El Campo no puede estar vacio");
+      setEditMode(false);
+
+      return;
+    } else {
+      setError(false);
+
+      dispatch({
+        type: UPDATE,
+        payload: { ...item, task: task },
+      });
+      setEditMode(false);
+      setTask("");
+    }
   };
 
   return (
@@ -57,7 +70,6 @@ const Form = () => {
         <ErrorBg>
           <Messaje>
             <p>{mensaje}</p>
-            <span>*Limite de tareas 10*</span>
             <button onClick={() => setError(false)}>Entiendo</button>
           </Messaje>
         </ErrorBg>

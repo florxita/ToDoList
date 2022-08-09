@@ -28,7 +28,7 @@ export const AddForm = styled.form`
       /* font-size: 35px; */
       width: 3rem;
       height: 3rem;
-      padding: 0.5rem;
+      padding: 0.8rem;
       border-radius: 50%;
     }
   }

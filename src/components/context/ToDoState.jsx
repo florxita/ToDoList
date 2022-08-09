@@ -4,8 +4,17 @@ import { Reducer, TYPES } from "./Reducer";
 import { v4 as uuiv4 } from "uuid";
 
 const ToDoState = ({ children }) => {
+  const getLocalStorage = () => {
+    let list = localStorage.getItem("tareas");
+    if (list) {
+      return (list = JSON.parse(localStorage.getItem("tareas")));
+    } else {
+      return [];
+    }
+  };
+
   const [task, setTask] = useState("");
-  const [state, dispatch] = useReducer(Reducer, []);
+  const [state, dispatch] = useReducer(Reducer, getLocalStorage());
 
   const [editMode, setEditMode] = useState(false);
 
