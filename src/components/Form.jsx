@@ -5,6 +5,7 @@ import { FormContainer } from "./styles/Form.styled";
 import ToDoListContext from "./context/ToDoListContext";
 import List from "./List";
 import { ErrorBg, Messaje } from "./styles/Messaje.styled";
+import { BiPencil } from "react-icons/bi";
 
 const Form = () => {
   const {
@@ -77,7 +78,9 @@ const Form = () => {
         <figure>
           <img src="assets/form-img.svg" alt="borde espiralado nota" />
         </figure>
-        <h1>ToDo List</h1>
+        <h1>
+          ToDo List <BiPencil />
+        </h1>
 
         {data.length === 0 ? (
           <span className="noTaskMessaje">No existen tareas pendientes</span>

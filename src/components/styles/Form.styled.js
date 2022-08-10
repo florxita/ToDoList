@@ -30,12 +30,21 @@ export const FormContainer = styled.div`
   }
 
   & h1 {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
     font-size: 25px;
     letter-spacing: 0.5px;
     font-weight: 700;
     font-family: "Poppins";
     margin: 1.5rem 0;
+    line-height: 0;
+
+    & svg {
+      fill: ${({ theme }) => theme.colors.feature};
+    }
   }
+
   & p,
   span {
     font-family: "Source Sans Pro";
