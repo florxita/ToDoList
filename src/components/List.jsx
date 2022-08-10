@@ -8,17 +8,11 @@ const List = ({ item }) => {
   const {
     deleteTask,
     setTask,
-    check,
     setCheck,
     setEditMode,
     handleFocus,
     setTaskEdited,
   } = useContext(ToDoListContext);
-
-  const handleCheck = () => {
-    setCheck(!check);
-    handleFocus();
-  };
 
   const edit = (item) => {
     setEditMode(true);
@@ -27,13 +21,21 @@ const List = ({ item }) => {
     handleFocus();
   };
 
+  const handleCheck = (item) => {
+    setCheck((current) => !current);
+    item.completed = !item.completed;
+    return;
+  };
+
   return (
     <Item>
       <Check>
-        <input type="checkbox" id={item.id} onChange={handleCheck} />
+        <input type="checkbox" id={item.id} onClick={() => handleCheck(item)} />
         <label htmlFor={item.id}></label>
       </Check>
-      <p className={check ? "taskCompleted" : null}>{item.task}</p>
+      <p className={item.completed === true ? "taskCompleted" : ""}>
+        {item.task}
+      </p>
 
       <div className="container">
         <BiPencil onClick={() => edit(item)} />

@@ -33,13 +33,13 @@ export const Shape = styled.span`
     border-radius: 50% 0% 80% 70% / 50% 0% 55% 100%;
     right: -2.5em;
     &:before {
-      content: url(src/img/garabato_1.svg);
+      content: url(assets/garabato_1.svg);
       position: relative;
       top: 2rem;
       right: 3rem;
     }
     &:after {
-      content: url(src/img/lunares.svg);
+      content: url(assets/lunares.svg);
       position: relative;
       top: 6rem;
       right: -4rem;
@@ -50,13 +50,13 @@ export const Shape = styled.span`
     left: -1rem;
     bottom: -2rem;
     &:before {
-      content: url(src/img/garabato.svg);
+      content: url(assets/garabato.svg);
       position: relative;
       bottom: -4rem;
       left: 7rem;
     }
     &:after {
-      content: url(src/img/lunares.svg);
+      content: url(assets/lunares.svg);
       position: relative;
       bottom: 10rem;
       left: -2.5rem;

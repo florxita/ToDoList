@@ -28,6 +28,7 @@ export const Item = styled.li`
   .taskCompleted {
     text-decoration: line-through;
     opacity: 70%;
+    font-weight: 100;
   }
   .container {
     display: flex;

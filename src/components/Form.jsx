@@ -25,17 +25,17 @@ const Form = () => {
     taskEdited,
     setTaskEdited,
   } = useContext(ToDoListContext);
-
   useEffect(() => {
     localStorage.setItem("tareas", JSON.stringify(data));
   }, [data]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setMensaje("");
     if (task.length === 0) {
       handleFocus();
     } else {
-      data.length < 9
+      data.length < 10
         ? (setError(false), addTask())
         : (setError(true),
           setMensaje(
@@ -50,7 +50,6 @@ const Form = () => {
       setError(true);
       setMensaje("El Campo no puede estar vacio");
       setEditMode(false);
-
       return;
     } else {
       setError(false);
@@ -76,7 +75,7 @@ const Form = () => {
       )}
       <FormContainer>
         <figure>
-          <img src="src/img/form-img.svg" alt="borde espiralado nota" />
+          <img src="assets/form-img.svg" alt="borde espiralado nota" />
         </figure>
         <h1>ToDo List</h1>
 
@@ -93,7 +92,16 @@ const Form = () => {
             ))}
           </ul>
         )}
-        <AddForm onSubmit={handleSubmit}>
+        <AddForm
+          onSubmit={
+            editMode
+              ? (e) => {
+                  e.preventDefault();
+                  editTask(taskEdited);
+                }
+              : handleSubmit
+          }
+        >
           <input
             type="text"
             value={task}
@@ -101,20 +109,9 @@ const Form = () => {
             placeholder="Ingresa una tarea"
             ref={inputRef}
           />
-          {editMode ? (
-            <button>
-              <BiPlus
-                onClick={(e) => {
-                  e.preventDefault();
-                  editTask(taskEdited);
-                }}
-              />
-            </button>
-          ) : (
-            <button>
-              <BiPlus onClick={handleFocus} />
-            </button>
-          )}
+          <button>
+            <BiPlus onClick={handleFocus} />
+          </button>
         </AddForm>
       </FormContainer>
     </>

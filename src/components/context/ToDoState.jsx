@@ -30,6 +30,7 @@ const ToDoState = ({ children }) => {
 
   const addTask = () => {
     const newTask = { id: uuiv4(), task, completed: false };
+
     setError(false);
     dispatch({
       type: ADD,

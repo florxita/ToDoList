@@ -6,7 +6,7 @@ export const FormContainer = styled.div`
   border-top: 0px;
   width: 25rem;
   max-width: 85vw;
-  height: 40rem;
+  height: 37rem;
   max-height: 100%;
   display: flex;
   justify-content: flex-start;
@@ -16,7 +16,6 @@ export const FormContainer = styled.div`
 
   ul {
     flex-grow: 2;
-    /* overflow-y: scroll; */
   }
   & figure {
     padding-bottom: 1rem;
@@ -40,7 +39,7 @@ export const FormContainer = styled.div`
   & p,
   span {
     font-family: "Source Sans Pro";
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
   }
 
