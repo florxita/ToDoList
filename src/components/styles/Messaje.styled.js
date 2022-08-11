@@ -3,13 +3,15 @@ import styled from "styled-components";
 export const ErrorBg = styled.div`
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  height: -webkit-fill-available;
+  position: fixed;
   z-index: 101;
   background: ${({ theme }) => theme.colors.darkTransparent};
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-grow: 1;
 `;
 
 export const Messaje = styled.div`

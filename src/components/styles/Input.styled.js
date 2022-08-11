@@ -7,6 +7,7 @@ export const AddForm = styled.form`
   justify-content: right;
   align-items: center;
   bottom: 2rem;
+  margin: 2rem 0 0;
 
   button {
     background: ${({ theme }) => theme.colors.feature};

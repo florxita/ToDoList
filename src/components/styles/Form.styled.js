@@ -6,8 +6,6 @@ export const FormContainer = styled.div`
   border-top: 0px;
   width: 25rem;
   max-width: 85vw;
-  height: 37rem;
-  max-height: 100%;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
