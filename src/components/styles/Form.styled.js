@@ -6,11 +6,13 @@ export const FormContainer = styled.div`
   border-top: 0px;
   width: 25rem;
   max-width: 85vw;
+  height: auto;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
   z-index: 100;
+  position: relative;
 
   ul {
     flex-grow: 2;

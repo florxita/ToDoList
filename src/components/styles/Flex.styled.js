@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const Flex = styled.div`
+  position: absolute;
   display: flex;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  justify-content: center;
 `;
 
 export const FlexCol = styled.div`

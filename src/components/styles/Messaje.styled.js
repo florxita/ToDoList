@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
 export const ErrorBg = styled.div`
+  position: fixed;
   width: 100vw;
   height: 100vh;
   height: -webkit-fill-available;
-  position: fixed;
   z-index: 101;
   background: ${({ theme }) => theme.colors.darkTransparent};
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  flex-grow: 1;
 `;
 
 export const Messaje = styled.div`
@@ -34,7 +33,6 @@ export const Messaje = styled.div`
     color: ${({ theme }) => theme.colors.error};
     font-size: 12px;
     text-transform: uppercase;
-    /* padding: 0.5rem 0; */
   }
   button {
     width: 70%;
@@ -46,6 +44,5 @@ export const Messaje = styled.div`
     border: none;
     padding: 0.75rem;
     border-radius: 0.35rem;
-    /* margin-top: 1rem; */
   }
 `;

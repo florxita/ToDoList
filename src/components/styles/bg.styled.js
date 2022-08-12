@@ -101,5 +101,7 @@ export const Shape = styled.span`
 
 export const Bg = styled.div`
   width: 100%;
-  height: auto;
+  height: 70%;
+  height: -webkit-fill-available;
+  overflow: hidden;
 `;

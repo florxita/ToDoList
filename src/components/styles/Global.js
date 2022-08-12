@@ -8,15 +8,21 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     color: ${({ theme }) => theme.colors.light};
 }
-
-body {
+html{
+    /* height: 100vh; */
+    height: -webkit-fill-available;
     background: ${({ theme }) => theme.colors.main};
-    font-family: 'Source Sans Pro', "Lato", "Poppins",
-    sans-serif;
 }
 
+
+body {
+    font-family: 'Source Sans Pro', "Lato", "Poppins",
+    sans-serif;
+    height: 100vh;
+    height: -webkit-fill-available; 
+} 
+
 .taskCompleted {
-    /* font-size: 2px; */
     text-decoration: dashed;
   }
 `;
